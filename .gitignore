@@ -1,0 +1,10 @@
+echo ".vs/
+*.suo
+*.db
+bin/
+obj/
+*.user
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal" > .gitignore
