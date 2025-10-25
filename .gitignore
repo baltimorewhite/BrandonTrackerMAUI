@@ -8,3 +8,51 @@ obj/
 *.ide
 *.ide-shm
 *.ide-wal" > .gitignore
+
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+*.dll
+*.exe
+*.app
+*.apk
+*.aab
+*.msi
+*.nupkg
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS config folders
+.vs/
+.idea/
+.vscode/
+
+# MAUI specific
+*.db
+*.db-shm
+*.db-wal
+*.ide
+*.ide-shm
+*.ide-wal
+
+# Logs and temp
+*.log
+*.lock
+*.tmp
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Others
+*.swp
+*.bak
+*.orig
