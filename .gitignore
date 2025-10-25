@@ -56,3 +56,17 @@ Desktop.ini
 *.swp
 *.bak
 *.orig
+
+
+BrandonTrackerApp/.vs/
+BrandonTrackerApp/bin/
+BrandonTrackerApp/obj/
+*.suo
+*.db
+*.ide
+*.ide-shm
+*.ide-wal
+
+**/.vs/
+**/bin/
+**/obj/
