@@ -3,12 +3,24 @@
     x:Class="BrandonTrackerApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BrandonTrackerApp"
+    xmlns:pages="clr-namespace:BrandonTrackerApp.Pages"
     Title="BrandonTrackerApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+
+    <ShellItem Title="Home" Route="home">
+        <ShellContent ContentTemplate="{DataTemplate pages:HomePage}" />
+    </ShellItem>
+
+    <ShellItem Title="Tasks" Route="tasks">
+        <ShellContent ContentTemplate="{DataTemplate pages:TaskListPage}" />
+    </ShellItem>
+
+    <ShellItem Title="History" Route="history">
+        <ShellContent ContentTemplate="{DataTemplate pages:TaskDetailPage}" />
+    </ShellItem>
+
+    <ShellItem Title="Settings" Route="settings">
+        <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}" />
+    </ShellItem>
 
 </Shell>
