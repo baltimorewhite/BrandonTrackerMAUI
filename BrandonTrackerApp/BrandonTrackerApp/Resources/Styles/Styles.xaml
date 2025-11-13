@@ -28,5 +28,14 @@
         <Setter Property="CornerRadius" Value="8" />
     </Style>
 
+    <!-- Entry Styles -->
+    <Style TargetType="Entry" x:Key="StyledEntry">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource EntryBackgroundLight}, Dark={StaticResource EntryBackgroundDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource EntryTextColorLight}, Dark={StaticResource EntryTextColorDark}}" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Margin" Value="0,5,0,0" />
+    </Style>
+
+
 </ResourceDictionary>
 

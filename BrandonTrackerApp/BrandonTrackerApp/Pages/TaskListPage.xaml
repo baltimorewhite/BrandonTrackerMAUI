@@ -91,7 +91,7 @@
                                     <!-- Contenido principal -->
                                     <VerticalStackLayout Spacing="12">
 
-                                        <!-- Fecha y nombre -->
+                                        <!-- Date and name-->
                                         <HorizontalStackLayout Spacing="10">
                                             <Frame BackgroundColor="{StaticResource PrimaryYellow}"
                                                Padding="5"
@@ -110,7 +110,7 @@
                                         </HorizontalStackLayout>
 
 
-                                        <!-- Dirección y teléfono -->
+                                        <!-- address and phone number -->
                                         <Label Text="{Binding Address}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
                                         <Label Text="{Binding Phone}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
 
@@ -134,7 +134,7 @@
                                         </HorizontalStackLayout>
 
                                         <!-- Estado de entrega -->
-                                        <HorizontalStackLayout Spacing="20">
+                                        <HorizontalStackLayout Spacing="80">
                                             <VerticalStackLayout>
                                                 <Label Text="Dropped" FontAttributes="Bold" />
                                                 <Picker ItemsSource="{Binding DropOptions}" SelectedItem="{Binding Dropped}" />
@@ -145,10 +145,20 @@
                                             </VerticalStackLayout>
                                         </HorizontalStackLayout>
 
-                                        <!-- Cantidad y notas -->
-                                        <HorizontalStackLayout Spacing="20">
-                                            <Entry Placeholder="# Picked Up" Text="{Binding Quantity}" WidthRequest="100" />
-                                            <Entry Placeholder="Notes" Text="{Binding Notes}" />
+                                        <!-- Dropped and Picked Quantity -->
+                                        <HorizontalStackLayout Spacing="50">
+                                                                                     
+                                              <Entry Style="{StaticResource StyledEntry}"
+                                                       Placeholder="# Dropped off"
+                                                       Text="{Binding DroppedQuantity}"
+                                                       Keyboard="Numeric" />
+
+                                              <Entry Style="{StaticResource StyledEntry}"
+                                                       Placeholder="# Picked Up"
+                                                       Text="{Binding PickedQuantity}"
+                                                       Keyboard="Numeric" />
+
+
                                         </HorizontalStackLayout>
                                         
 
