@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BrandonTrackerApp.Models
 {
-    public class TaskItem
+    public class TaskItem : INotifyPropertyChanged
     {
         public DateTime Date { get; set; }
         public string JobType { get; set; }
@@ -49,10 +51,39 @@ namespace BrandonTrackerApp.Models
             // Aquí iría la lógica para enviar a Google Sheets o guardar localmente
         });
 
-        public ICommand OpenMapCommand => new Command(() =>
+        public ICommand OpenMapCommand => new Command(async () =>
         {
-            var url = $"https://maps.app.goo.gl/vDRoxgpht2nqeTXi7{Uri.EscapeDataString(Address)}";
-            Launcher.OpenAsync(new Uri(url));
+            if (string.IsNullOrWhiteSpace(Address))
+            {
+                await Application.Current.MainPage.DisplayAlert("No Address", "This task has no address to open.", "OK");
+                return;
+            }
+
+            var url = $"https://www.google.com/maps/search/?api=1&query={Uri.EscapeDataString(Address)}";
+            await Launcher.Default.OpenAsync(new Uri(url));
         });
+
+        // with this property I can expand my daily tasks
+
+        private bool _isExpanded;
+        public bool IsExpanded
+        {
+            get => _isExpanded;
+            set
+            {
+                _isExpanded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ToggleExpandCommand => new Command(() => IsExpanded = !IsExpanded);
+
+        // Implementation of INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
     }
 }

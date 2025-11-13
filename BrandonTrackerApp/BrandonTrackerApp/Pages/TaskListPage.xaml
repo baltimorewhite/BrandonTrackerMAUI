@@ -5,7 +5,7 @@
              Title="TaskListPage">
     <Grid RowDefinitions="Auto,*">
 
-        <!-- 🔝 Header fijo -->
+        <!-- Header fijo -->
         <VerticalStackLayout Padding="20" BackgroundColor="{StaticResource PrimaryYellow}" Grid.Row="0" Spacing="15">
 
             <!-- Título dividido en dos líneas -->
@@ -19,7 +19,7 @@
            FontAttributes="Bold"
            TextColor="{StaticResource NeutralGray}" />
 
-            <!-- 🔢 Resumen de entregas en dos columnas -->
+            <!-- Resumen de entregas en dos columnas -->
             <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="15">
 
                 <!-- Total -->
@@ -71,117 +71,122 @@
 
         </VerticalStackLayout>
 
-        <!-- 📋 Lista scrollable -->
+        <!-- scrollable list -->
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="10" Spacing="15">
                 <CollectionView ItemsSource="{Binding CompletedTasks}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame BorderColor="{StaticResource NeutralGray}" CornerRadius="12" Padding="15" Margin="10">
+                            <!-- Each task card -->
+                            <Border Stroke="{StaticResource NeutralGray}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="15" Margin="10">
                                 <Grid>
-                                    <!-- Ícono de ubicación arriba a la derecha -->
-                                    <ImageButton Source="placeholder.png"
-                                             BackgroundColor="{StaticResource PrimaryYellow}"
-                                             WidthRequest="30"
-                                             HeightRequest="30"
-                                             HorizontalOptions="End"
-                                             VerticalOptions="Start"
-                                             Command="{Binding OpenMapCommand}" />
 
-                                    <!-- Contenido principal -->
+                                    <!-- Location icon (top-right corner) -->
+                                    <ImageButton Source="placeholder.png"
+                                                 BackgroundColor="{StaticResource PrimaryYellow}"
+                                                 WidthRequest="30"
+                                                 HeightRequest="30"
+                                                 HorizontalOptions="End"
+                                                 VerticalOptions="Start"
+                                                 Command="{Binding OpenMapCommand}" />
+
+                                    <!-- Main content -->
                                     <VerticalStackLayout Spacing="12">
 
-                                        <!-- Date and name-->
-                                        <HorizontalStackLayout Spacing="10">
-                                            <Frame BackgroundColor="{StaticResource PrimaryYellow}"
-                                               Padding="5"
-                                               CornerRadius="5"
-                                               HasShadow="False">
-                                                <Label Text="{Binding Date, StringFormat='{}{0:dd-MMM}'}"
-                                                   TextColor="{StaticResource PrimaryBlack}"
-                                                   FontAttributes="Bold" />
-                                            </Frame>
+                                        <!-- Header always visible: date, business name, address, phone, job -->
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <!-- Tap to expand/collapse -->
+                                                <TapGestureRecognizer Command="{Binding ToggleExpandCommand}" />
+                                            </Grid.GestureRecognizers>
 
-                                            <Label Text="{Binding BusinessName}"
-                                               FontSize="20"
-                                               FontAttributes="Bold"
-                                               TextColor="{StaticResource PrimaryBlack}"
-                                               HorizontalOptions="StartAndExpand" />
-                                        </HorizontalStackLayout>
-
-
-                                        <!-- address and phone number -->
-                                        <Label Text="{Binding Address}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
-                                        <Label Text="{Binding Phone}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
-
-
-                                        <!-- JobType -->
-                                        <HorizontalStackLayout Spacing="20">
-                                            <Label Text="Job:" FontAttributes="Bold" />
-                                            <Label Text="{Binding JobType}" />
-                                        </HorizontalStackLayout>
-
-
-                                        <!-- Box Details -->
-                                        <HorizontalStackLayout Spacing="20">
-                                            <Label Text="Box Size:" FontAttributes="Bold" />
-                                            <Label Text="{Binding BoxSize}" />
-                                        </HorizontalStackLayout>
-
-                                        <HorizontalStackLayout Spacing="20">
-                                            <Label Text="Notes:" FontAttributes="Bold" />
-                                            <Label Text="{Binding Notes}" />
-                                        </HorizontalStackLayout>
-
-                                        <!-- Estado de entrega -->
-                                        <HorizontalStackLayout Spacing="80">
                                             <VerticalStackLayout>
-                                                <Label Text="Dropped" FontAttributes="Bold" />
-                                                <Picker ItemsSource="{Binding DropOptions}" SelectedItem="{Binding Dropped}" />
-                                            </VerticalStackLayout>
-                                            <VerticalStackLayout>
-                                                <Label Text="Picked Up" FontAttributes="Bold" />
-                                                <Picker ItemsSource="{Binding PickupOptions}" SelectedItem="{Binding PickedUp}" />
-                                            </VerticalStackLayout>
-                                        </HorizontalStackLayout>
+                                                <!-- Date and business name -->
+                                                <HorizontalStackLayout Spacing="10">
+                                                    <Border Background="{StaticResource PrimaryYellow}" StrokeShape="RoundRectangle 5" Padding="5">
+                                                        <Label Text="{Binding Date, StringFormat='{}{0:dd-MMM}'}"
+                                                               TextColor="{StaticResource PrimaryBlack}"
+                                                               FontAttributes="Bold" />
+                                                    </Border>
 
-                                        <!-- Dropped and Picked Quantity -->
-                                        <HorizontalStackLayout Spacing="50">
-                                                                                     
-                                              <Entry Style="{StaticResource StyledEntry}"
+                                                    <Label Text="{Binding BusinessName}"
+                                                           FontSize="20"
+                                                           FontAttributes="Bold"
+                                                           TextColor="{StaticResource PrimaryBlack}"
+                                                           HorizontalOptions="StartAndExpand" />
+                                                </HorizontalStackLayout>
+
+                                                <!-- Address and phone -->
+                                                <Label Text="{Binding Address}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
+                                                <Label Text="{Binding Phone}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
+
+                                                <!-- Job type -->
+                                                <HorizontalStackLayout Spacing="20">
+                                                    <Label Text="Job:" FontAttributes="Bold" />
+                                                    <Label Text="{Binding JobType}" />
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Grid>
+
+                                        <!-- Expandable content: bin details, notes, quantities, Done button -->
+                                        <StackLayout IsVisible="{Binding IsExpanded}" Spacing="12">
+
+                                            <!-- Box size and institutional notes -->
+                                            <HorizontalStackLayout Spacing="20">
+                                                <Label Text="Box Size:" FontAttributes="Bold" />
+                                                <Label Text="{Binding BoxSize}" />
+                                            </HorizontalStackLayout>
+
+                                            <HorizontalStackLayout Spacing="20">
+                                                <Label Text="Notes:" FontAttributes="Bold" />
+                                                <Label Text="{Binding Notes}" />
+                                            </HorizontalStackLayout>
+
+                                            <!-- Bin type selection -->
+                                            <HorizontalStackLayout Spacing="80">
+                                                <VerticalStackLayout>
+                                                    <Label Text="Dropped" FontAttributes="Bold" />
+                                                    <Picker ItemsSource="{Binding DropOptions}" SelectedItem="{Binding Dropped}" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout>
+                                                    <Label Text="Picked Up" FontAttributes="Bold" />
+                                                    <Picker ItemsSource="{Binding PickupOptions}" SelectedItem="{Binding PickedUp}" />
+                                                </VerticalStackLayout>
+                                            </HorizontalStackLayout>
+
+                                            <!-- Quantity entries -->
+                                            <HorizontalStackLayout Spacing="50">
+                                                <Entry Style="{StaticResource StyledEntry}"
                                                        Placeholder="# Dropped off"
                                                        Text="{Binding DroppedQuantity}"
                                                        Keyboard="Numeric" />
 
-                                              <Entry Style="{StaticResource StyledEntry}"
+                                                <Entry Style="{StaticResource StyledEntry}"
                                                        Placeholder="# Picked Up"
                                                        Text="{Binding PickedQuantity}"
                                                        Keyboard="Numeric" />
+                                            </HorizontalStackLayout>
 
+                                            <!-- Driver notes -->
+                                            <VerticalStackLayout>
+                                                <Label Text="Driver Notes" FontAttributes="Bold" FontSize="14" />
+                                                <Editor Placeholder="Notes or comments"
+                                                        Text="{Binding DriverNotes}"
+                                                        AutoSize="TextChanges"
+                                                        BackgroundColor="{StaticResource PrimaryWhite}"
+                                                        HeightRequest="80"
+                                                        Margin="0,10,0,0" />
+                                            </VerticalStackLayout>
 
-                                        </HorizontalStackLayout>
-                                        
-
-                                        <!-- Driver Comments-->    
-                                        <VerticalStackLayout>
-                                            <Label Text="Driver Notes" FontAttributes="Bold" FontSize="14" />
-                                            <Editor Placeholder="Notes or comments"
-                                                    Text="{Binding DriverNotes}"
-                                                    AutoSize="TextChanges"
-                                                    BackgroundColor="{StaticResource PrimaryWhite}"
-                                                    HeightRequest="80"
-                                                    Margin="0,10,0,0" />
-                                        </VerticalStackLayout>
-
-
-                                        <!-- Botón de acción -->
-                                        <Button Text="Done"
-                                            BackgroundColor="{StaticResource PrimaryYellow}"
-                                            TextColor="{StaticResource PrimaryBlack}"
-                                            Command="{Binding CompleteCommand}" />
+                                            <!-- Confirmation button -->
+                                            <Button Text="Done"
+                                                    BackgroundColor="{StaticResource PrimaryYellow}"
+                                                    TextColor="{StaticResource PrimaryBlack}"
+                                                    Command="{Binding CompleteCommand}" />
+                                        </StackLayout>
                                     </VerticalStackLayout>
                                 </Grid>
-                            </Frame>
+                            </Border>
 
 
                         </DataTemplate>

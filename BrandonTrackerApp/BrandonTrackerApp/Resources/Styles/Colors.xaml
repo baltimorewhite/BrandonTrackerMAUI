@@ -15,4 +15,13 @@
     <SolidColorBrush x:Key="PrimaryWhiteBrush" Color="{StaticResource PrimaryWhite}" />
     <SolidColorBrush x:Key="NeutralGrayBrush" Color="{StaticResource NeutralGray}" />
 
+    <!-- Entrys  -->
+
+    <Color x:Key="EntryBackgroundLight">#F0F0F0</Color>
+    <Color x:Key="EntryBackgroundDark">#2C2C2C</Color>
+
+    <Color x:Key="EntryTextColorLight">#000000</Color>
+    <Color x:Key="EntryTextColorDark">#FFFFFF</Color>
+
+
 </ResourceDictionary>
