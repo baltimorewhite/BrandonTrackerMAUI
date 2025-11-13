@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace BrandonTrackerApp.Pages;
 
-namespace BrandonTrackerApp.Pages
+public partial class TaskDetailPage : ContentPage
 {
-    public partial class TaskDetailPage : ContentPage
-    {
-        public  TaskDetailPage()
-        {
-            InitializeComponent();
-        }
-
-    }
-
+	public TaskDetailPage()
+	{
+		InitializeComponent();
+	}
 }

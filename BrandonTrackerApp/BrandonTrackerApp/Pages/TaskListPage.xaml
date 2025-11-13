@@ -1,7 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BrandonTrackerApp.Pages.TaskListPage">
-    <StackLayout Padding="20">
-        <Label Text="Task List Page" FontSize="24" HorizontalOptions="Center" />
-    </StackLayout>
+             x:Class="BrandonTrackerApp.Pages.TaskListPage"
+             Title="TaskListPage">
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- 🔝 Header fijo -->
+        <VerticalStackLayout Padding="20" BackgroundColor="{StaticResource PrimaryYellow}" Grid.Row="0" Spacing="15">
+
+            <!-- Título dividido en dos líneas -->
+            <Label Text="Deliveries"
+           FontSize="24"
+           FontAttributes="Bold"
+           TextColor="{StaticResource PrimaryBlack}" />
+
+            <Label Text="Task Management"
+           FontSize="15"
+           FontAttributes="Bold"
+           TextColor="{StaticResource NeutralGray}" />
+
+            <!-- 🔢 Resumen de entregas en dos columnas -->
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="15">
+
+                <!-- Total -->
+                <Frame Grid.Row="0" Grid.Column="0" Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="icon_total.png" WidthRequest="24" HeightRequest="24" />
+                        <VerticalStackLayout>
+                            <Label Text="Total" FontAttributes="Bold" FontSize="14" />
+                            <Label Text="{Binding Total}" FontSize="16" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- Completed -->
+                <Frame Grid.Row="0" Grid.Column="1" Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="icon_completed.png" WidthRequest="24" HeightRequest="24" />
+                        <VerticalStackLayout>
+                            <Label Text="Completed" FontAttributes="Bold" FontSize="14" />
+                            <Label Text="{Binding Completed}" FontSize="16" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- In Progress -->
+                <Frame Grid.Row="1" Grid.Column="0" Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="icon_inprogress.png" WidthRequest="24" HeightRequest="24" />
+                        <VerticalStackLayout>
+                            <Label Text="In Progress" FontAttributes="Bold" FontSize="14" />
+                            <Label Text="{Binding InProgress}" FontSize="16" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- Pending -->
+                <Frame Grid.Row="1" Grid.Column="1" Padding="10" CornerRadius="10" BackgroundColor="White">
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="icon_pending.png" WidthRequest="24" HeightRequest="24" />
+                        <VerticalStackLayout>
+                            <Label Text="Pending" FontAttributes="Bold" FontSize="14" />
+                            <Label Text="{Binding Pending}" FontSize="16" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+            </Grid>
+
+
+        </VerticalStackLayout>
+
+        <!-- 📋 Lista scrollable -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="10" Spacing="15">
+                <CollectionView ItemsSource="{Binding CompletedTasks}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="{StaticResource NeutralGray}" CornerRadius="12" Padding="15" Margin="10">
+                                <Grid>
+                                    <!-- Ícono de ubicación arriba a la derecha -->
+                                    <ImageButton Source="placeholder.png"
+                                             BackgroundColor="{StaticResource PrimaryYellow}"
+                                             WidthRequest="30"
+                                             HeightRequest="30"
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Start"
+                                             Command="{Binding OpenMapCommand}" />
+
+                                    <!-- Contenido principal -->
+                                    <VerticalStackLayout Spacing="12">
+
+                                        <!-- Fecha y nombre -->
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Frame BackgroundColor="{StaticResource PrimaryYellow}"
+                                               Padding="5"
+                                               CornerRadius="5"
+                                               HasShadow="False">
+                                                <Label Text="{Binding Date, StringFormat='{}{0:dd-MMM}'}"
+                                                   TextColor="{StaticResource PrimaryBlack}"
+                                                   FontAttributes="Bold" />
+                                            </Frame>
+
+                                            <Label Text="{Binding BusinessName}"
+                                               FontSize="20"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource PrimaryBlack}"
+                                               HorizontalOptions="StartAndExpand" />
+                                        </HorizontalStackLayout>
+
+
+                                        <!-- Dirección y teléfono -->
+                                        <Label Text="{Binding Address}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
+                                        <Label Text="{Binding Phone}" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
+
+
+                                        <!-- JobType -->
+                                        <HorizontalStackLayout Spacing="20">
+                                            <Label Text="Job:" FontAttributes="Bold" />
+                                            <Label Text="{Binding JobType}" />
+                                        </HorizontalStackLayout>
+
+
+                                        <!-- Box Details -->
+                                        <HorizontalStackLayout Spacing="20">
+                                            <Label Text="Box Size:" FontAttributes="Bold" />
+                                            <Label Text="{Binding BoxSize}" />
+                                        </HorizontalStackLayout>
+
+                                        <HorizontalStackLayout Spacing="20">
+                                            <Label Text="Notes:" FontAttributes="Bold" />
+                                            <Label Text="{Binding Notes}" />
+                                        </HorizontalStackLayout>
+
+                                        <!-- Estado de entrega -->
+                                        <HorizontalStackLayout Spacing="20">
+                                            <VerticalStackLayout>
+                                                <Label Text="Dropped" FontAttributes="Bold" />
+                                                <Picker ItemsSource="{Binding DropOptions}" SelectedItem="{Binding Dropped}" />
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout>
+                                                <Label Text="Picked Up" FontAttributes="Bold" />
+                                                <Picker ItemsSource="{Binding PickupOptions}" SelectedItem="{Binding PickedUp}" />
+                                            </VerticalStackLayout>
+                                        </HorizontalStackLayout>
+
+                                        <!-- Cantidad y notas -->
+                                        <HorizontalStackLayout Spacing="20">
+                                            <Entry Placeholder="# Picked Up" Text="{Binding Quantity}" WidthRequest="100" />
+                                            <Entry Placeholder="Notes" Text="{Binding Notes}" />
+                                        </HorizontalStackLayout>
+                                        
+
+                                        <!-- Driver Comments-->    
+                                        <VerticalStackLayout>
+                                            <Label Text="Driver Notes" FontAttributes="Bold" FontSize="14" />
+                                            <Editor Placeholder="Notes or comments"
+                                                    Text="{Binding DriverNotes}"
+                                                    AutoSize="TextChanges"
+                                                    BackgroundColor="{StaticResource PrimaryWhite}"
+                                                    HeightRequest="80"
+                                                    Margin="0,10,0,0" />
+                                        </VerticalStackLayout>
+
+
+                                        <!-- Botón de acción -->
+                                        <Button Text="Done"
+                                            BackgroundColor="{StaticResource PrimaryYellow}"
+                                            TextColor="{StaticResource PrimaryBlack}"
+                                            Command="{Binding CompleteCommand}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 </ContentPage>

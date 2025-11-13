@@ -1,7 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BrandonTrackerApp.Pages.TaskDetailPage">
-    <StackLayout Padding="20">
-        <Label Text="Task Detail Page" FontSize="24" HorizontalOptions="Center" />
-    </StackLayout>
+             x:Class="BrandonTrackerApp.Pages.TaskDetailPage"
+             Title="TaskDetailPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Title -->
+            <Label Text="{Binding Title}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource PrimaryBlack}" />
+
+            <!-- Status -->
+            <Label Text="{Binding StatusText}"
+                   FontSize="16"
+                   TextColor="{StaticResource NeutralGray}" />
+
+            <!-- Description -->
+            <Label Text="Description"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource PrimaryBlack}" />
+            <Label Text="{Binding Description}"
+                   FontSize="16"
+                   TextColor="{StaticResource PrimaryBlack}" />
+
+            <!-- Due Date -->
+            <Label Text="Due Date"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource PrimaryBlack}" />
+            <Label Text="{Binding DueDate, StringFormat='{0:dd MMM yyyy}'}"
+                   FontSize="16"
+                   TextColor="{StaticResource PrimaryBlack}" />
+
+            <!-- Button action -->
+            <Button Text="{Binding ActionButtonText}"
+                    Command="{Binding ActionCommand}"
+                    BackgroundColor="{StaticResource PrimaryYellow}"
+                    TextColor="{StaticResource PrimaryBlack}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

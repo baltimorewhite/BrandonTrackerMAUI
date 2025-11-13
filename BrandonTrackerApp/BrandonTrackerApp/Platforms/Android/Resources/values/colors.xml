@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#512BD4</color>
-    <color name="colorPrimaryDark">#2B0B98</color>
-    <color name="colorAccent">#2B0B98</color>
+	<!-- Primary color used for status bar and toolbar -->
+	<color name="primary">#FFD700</color>
+	<!-- Institutional black -->
+
+	<!-- Dark variant of primary color -->
+	<color name="primary_dark">#FFD700</color>
+	<!-- Institutional black -->
+
+	<!-- Accent color used for active tab icons and highlights -->
+	<color name="accent">#FFD700</color>
+	<!-- Institutional yellow -->
+
+	<!-- Background color used for system views -->
+	<color name="background">#FFFFFF</color>
+	<!-- Institutional white -->
 </resources>
