@@ -2,11 +2,108 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BrandonTrackerApp.Pages.SettingsPage"
-             Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Settings"
+             BackgroundColor="{StaticResource PrimaryWhite}">
+
+    <VerticalStackLayout Padding="20" Spacing="25">
+
+        <!-- Main Title -->
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Settings"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="{StaticResource PrimaryBlack}" />
+        </HorizontalStackLayout>
+
+        <!-- Header section inside shaded box -->
+        <Border Stroke="{StaticResource NeutralGray}"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 12"
+            Padding="15"
+            BackgroundColor="White"
+            Margin="0,10,0,0">
+
+            <VerticalStackLayout Spacing="15">
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_settings.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" 
+                           BackgroundColor="{StaticResource PrimaryYellow}"/>
+                    
+                    <Label Text="DeliveryTracker"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource PrimaryBlack}" />
+                </HorizontalStackLayout>
+
+                <Label Text="Customise your delivery experience"
+                       FontSize="14"
+                       TextColor="{StaticResource NeutralGray}" />
+
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_exclamation.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                    <Label Text="Changes are saved automatically"
+                       FontSize="12"
+                       TextColor="{StaticResource NeutralGray}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Theme Section -->
+        <Border Stroke="{StaticResource NeutralGray}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="15" BackgroundColor="White">
+            <VerticalStackLayout Spacing="15">
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_palette.png" 
+                           WidthRequest="24" 
+                           HeightRequest="24" 
+                           VerticalOptions="Center" 
+                           BackgroundColor="{StaticResource PrimaryYellow}"/>
+                    <Label Text="Theme" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource PrimaryBlack}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_sun.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                    <RadioButton Content="Light Mode" GroupName="Theme" IsChecked="{Binding IsLightMode}" />
+                </HorizontalStackLayout>
+                <Label Text="Bright interface for daytime use" FontSize="12" TextColor="{StaticResource NeutralGray}" />
+
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_moon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" />
+                    <RadioButton Content="Dark Mode" GroupName="Theme" IsChecked="{Binding IsDarkMode}" />
+                </HorizontalStackLayout>
+                <Label Text="Dark interface for low-light conditions" FontSize="12" TextColor="{StaticResource NeutralGray}" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Account + Sync Section -->
+        <Border Stroke="{StaticResource NeutralGray}" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="15" BackgroundColor="White">
+            <VerticalStackLayout Spacing="15">
+
+                <!-- Account Header -->
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_user.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" 
+                           BackgroundColor="{StaticResource PrimaryYellow}"/>
+                    <Label Text="Account" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource PrimaryBlack}" />
+                </HorizontalStackLayout>
+
+                <!-- Google Sheets Status -->
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_cloudcheck.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                    <Label Text="Google Sheets" FontSize="14" TextColor="{StaticResource PrimaryBlack}" />
+                    <Label Text="{Binding GoogleSheetsStatus}" FontSize="14" TextColor="{StaticResource StatusColor}" />
+                    <Button Text="Disconnect" Command="{Binding DisconnectSheetsCommand}" BackgroundColor="{StaticResource PrimaryYellow}" TextColor="{StaticResource PrimaryBlack}" />
+                </HorizontalStackLayout>
+
+                <!-- Sync Frequency -->
+                <HorizontalStackLayout Spacing="15">
+                    <Image Source="icon_sync.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                    <Label Text="Sync Frequency" FontAttributes="Bold" FontSize="16" TextColor="{StaticResource PrimaryBlack}" />
+                </HorizontalStackLayout>
+
+                <Picker ItemsSource="{Binding SyncOptions}" SelectedItem="{Binding SelectedSyncOption}" Title="Select frequency" TextColor="{StaticResource PrimaryBlack}" />
+            </VerticalStackLayout>
+        </Border>
+
     </VerticalStackLayout>
+
+
 </ContentPage>
+

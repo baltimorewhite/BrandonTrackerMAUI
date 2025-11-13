@@ -24,4 +24,10 @@
     <Color x:Key="EntryTextColorDark">#FFFFFF</Color>
 
 
+    <!-- Un verde profesional para estado conectado -->
+    <Color x:Key="StatusColor">#2E7D32</Color>
+
+
+
+
 </ResourceDictionary>
