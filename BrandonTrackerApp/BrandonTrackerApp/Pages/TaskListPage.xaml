@@ -5,10 +5,10 @@
              Title="TaskListPage">
     <Grid RowDefinitions="Auto,*">
 
-        <!-- Header fijo -->
+        <!-- Stick Header -->
         <VerticalStackLayout Padding="20" BackgroundColor="{StaticResource PrimaryYellow}" Grid.Row="0" Spacing="15">
 
-            <!-- Título dividido en dos líneas -->
+            <!-- title section -->
             <Label Text="Deliveries"
            FontSize="24"
            FontAttributes="Bold"

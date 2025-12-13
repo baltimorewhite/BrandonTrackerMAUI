@@ -23,7 +23,7 @@
 
     <!-- Button Styles-->
     <Style TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryYellow}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimaryYellow}, Dark={StaticResource EntryTextColorDark}}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryBlack}" />
         <Setter Property="CornerRadius" Value="8" />
     </Style>
