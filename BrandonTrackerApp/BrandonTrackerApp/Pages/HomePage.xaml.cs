@@ -4,7 +4,7 @@ public partial class HomePage : ContentPage
 {
     public string CurrentDate => DateTime.Today.ToString("dd/MM/yyyy");
 
-    // Valores simulados (luego los conectamos al ViewModel)
+    // I need to change it by real bins requested 
     public int Bin100L => 3;
     public int Bin240L => 5;
     public int BinCorporate => 2;

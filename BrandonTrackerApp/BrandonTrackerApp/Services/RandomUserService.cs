@@ -59,16 +59,13 @@ namespace BrandonTrackerApp.Services
             var random = new Random(); 
 
             // Possible options
-            string[] jobTypes = { "COLLECTION", "DELIVERY", "INSPECTION" };
+            string[] jobTypes = { "COLLECTION", "DROP OFF", "BOX SWAP" };
             string[] boxSizes = { "100L", "240L", "Corporate", "Archive" };
             string[] notes = {  "Transfer their paper into our 240L bin.",
-                                "Initial bin delivery.",
-                                "Client not ready for delivery.",
-                                "Bin swap requested." };
-            string[] driverNotes = { "Client requested bin swap from 100L to 240L.",
-                                    "First-time delivery, no pickup required.",
-                                    "No bins delivered or picked up.",
-                                    "Inspection completed successfully." };
+                                "Before 10:30am.",
+                                "Our house is alone but you can come in anyway.",
+                                "Call me when you are about to arrive" };
+
 
             return response.Results.Select(user => new TaskItem
             {
@@ -78,13 +75,15 @@ namespace BrandonTrackerApp.Services
 
                 // Randomised fields
                 JobType = jobTypes[random.Next(jobTypes.Length)],
+                Quantity = random.Next(1, 11),
                 BoxSize = boxSizes[random.Next(boxSizes.Length)],
                 Notes = notes[random.Next(notes.Length)],
                 Dropped = boxSizes[random.Next(boxSizes.Length)],
                 DroppedQuantity = random.Next(1, 5).ToString(), // random 1–4
                 PickedUp = boxSizes[random.Next(boxSizes.Length)],
                 PickedQuantity = random.Next(0, 3).ToString(), // random 0–2
-                DriverNotes = driverNotes[random.Next(driverNotes.Length)],
+                
+
 
                 Date = DateTime.Today
             }).ToList();

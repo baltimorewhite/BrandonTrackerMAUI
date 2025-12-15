@@ -34,7 +34,7 @@
         </Style>
     </ContentPage.Resources>
 
-    <!-- Layout principal -->
+    <!-- principal Layout -->
     <StackLayout Style="{StaticResource StackStyle}" Padding="20" Spacing="15">
 
         <Label Text="Hi, Nelson" FontSize="24" HorizontalOptions="Start"/>
@@ -85,9 +85,9 @@
 
         <Label Text="Bins for today's run" FontSize="24" HorizontalOptions="Center"/>
 
-        <!-- Cuadros resumen de bines -->
+        <!-- Summary bins -->
         <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
-            <!-- Fila 1 -->
+            <!-- Row 1 -->
             <Border Grid.Row="0" Grid.Column="0" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
                 <VerticalStackLayout>
                     <Label Text="100L" FontSize="18" HorizontalOptions="Center"/>
@@ -109,7 +109,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Fila 2 -->
+            <!-- Row 2 -->
             <Border Grid.Row="1" Grid.Column="0" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
                 <VerticalStackLayout>
                     <Label Text="Archive" FontSize="18" HorizontalOptions="Center" />

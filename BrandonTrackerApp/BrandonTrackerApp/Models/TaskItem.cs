@@ -13,6 +13,8 @@ namespace BrandonTrackerApp.Models
     {
         public DateTime Date { get; set; }
         public string JobType { get; set; }
+        public int Quantity { get; set; }
+
         public string BusinessName { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -42,13 +44,13 @@ namespace BrandonTrackerApp.Models
                 return;
             }
 
-            // Guardar datos
+            
             Console.WriteLine($"Dropped: {Dropped} ({DroppedQuantity})");
             Console.WriteLine($"Picked Up: {PickedUp} ({PickedQuantity})");
             Console.WriteLine($"Driver Notes: {DriverNotes}");
 
 
-            // Aquí iría la lógica para enviar a Google Sheets o guardar localmente
+            
         });
 
         public ICommand OpenMapCommand => new Command(async () =>

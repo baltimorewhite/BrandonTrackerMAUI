@@ -125,6 +125,12 @@
                                                     <Label Text="Job:" FontAttributes="Bold" />
                                                     <Label Text="{Binding JobType}" />
                                                 </HorizontalStackLayout>
+
+                                                <!-- Quantity -->
+                                                <HorizontalStackLayout Spacing="20">
+                                                    <Label Text="Quantity:" FontAttributes="Bold" />
+                                                    <Label Text="{Binding Quantity}" />
+                                                </HorizontalStackLayout>
                                             </VerticalStackLayout>
                                         </Grid>
 
