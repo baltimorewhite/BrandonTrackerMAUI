@@ -3,11 +3,133 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BrandonTrackerApp.Pages.HomePage"
              Title="HomePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome, this app is still in progress please keep looking"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Try me!" />
-    </VerticalStackLayout>
+
+
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout" x:Key="StackStyle">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <!-- Portrait -->
+                        <VisualState x:Name="Portrait">
+                            <VisualState.StateTriggers>
+                                <OrientationStateTrigger Orientation="Portrait" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="Orientation" Value="Vertical" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <!-- Landscape -->
+                        <VisualState x:Name="Landscape">
+                            <VisualState.StateTriggers>
+                                <OrientationStateTrigger Orientation="Landscape" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="Orientation" Value="Horizontal" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Layout principal -->
+    <StackLayout Style="{StaticResource StackStyle}" Padding="20" Spacing="15">
+
+        <Label Text="Hi, Nelson" FontSize="24" HorizontalOptions="Start"/>
+        
+        <Label Text="{Binding CurrentDate}" FontSize="24" HorizontalOptions="Start"/>
+        
+
+        <Grid HeightRequest="410" WidthRequest="410" x:Name="VanImageGrid">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="OrientationStates">
+                    
+                    <VisualState x:Name="Portrait">
+                        <VisualState.StateTriggers>
+                            <OrientationStateTrigger Orientation="Portrait" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsVisible" Value="True" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <!-- Landscape - van img hidden -->
+                    <VisualState x:Name="Landscape">
+                        <VisualState.StateTriggers>
+                            <OrientationStateTrigger Orientation="Landscape" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="IsVisible" Value="False" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+
+            <Image Source="van.png" Aspect="AspectFit"/>
+            <!-- Gradient -->
+            <BoxView>
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="White" Offset="0"/>
+                        <!-- soft transition -->
+                        <GradientStop Color="#CCFFFFFF" Offset="0.15"/>
+                        <GradientStop Color="#80FFFFFF" Offset="0.3"/>
+                        <GradientStop Color="#40FFFFFF" Offset="0.45"/>
+                        <GradientStop Color="Transparent" Offset="0.6"/>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+
+        </Grid>
+
+        <Label Text="Bins for today's run" FontSize="24" HorizontalOptions="Center"/>
+
+        <!-- Cuadros resumen de bines -->
+        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+            <!-- Fila 1 -->
+            <Border Grid.Row="0" Grid.Column="0" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="100L" FontSize="18" HorizontalOptions="Center"/>
+                    <Label Text="{Binding Bin100L}" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="240L" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="{Binding Bin240L}" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="2" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Corporate" FontSize="18" HorizontalOptions="Center"/>
+                    <Label Text="{Binding BinCorporate}" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Fila 2 -->
+            <Border Grid.Row="1" Grid.Column="0" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Archive" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="{Binding BinArchive}" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="1" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Small" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="{Binding BinSmall}" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="2" StrokeShape="RoundRectangle 10" BackgroundColor="#FFD700" Padding="5" Margin="10">
+                <VerticalStackLayout>
+                    <Label Text="Locked" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="{Binding BinLocked}" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+    </StackLayout>
 </ContentPage>
